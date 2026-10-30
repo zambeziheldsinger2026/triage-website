@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050208">
+<link rel="canonical" href="https://triagewebstudios.co.za/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://triagewebstudios.co.za/">
+<meta property="og:title" content="Triage Web Studios">
+<meta property="og:description" content="Fast, beautiful websites for South African businesses. We build your website first. You only pay if you love it.">
+<meta property="og:image" content="https://triagewebstudios.co.za/assets/triage-logo.png">
+<meta name="twitter:card" content="summary">
+<title>Triage Web Studios</title>
+<meta name="description" content="Triage Web Studios designs and develops fast, beautiful websites for ambitious South African businesses. We build your website first. You only pay if you love it.">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout concept: an OLED night sky of liquid colour seen through a sheet of black liquid glass;
+   condensed poster type sits on top, and every interactive surface is a floating pane of glass. */
+:root {
+  color-scheme: dark;
+  /* colour */
+  --void: #050208;
+  --void-2: #0a0414;
+  --violet: #7c3aed;
+  --violet-2: #a855f7;
+  --lilac: #c084fc;
+  --electric: #8b5cf6;
+  --magenta: #d946ef;
+  --sky: #38bdf8;
+  --sun: #fbbf24;
+  --ink: #f5f3ff;
+  --ink-2: #b8b3c9;
+  --ink-3: #8d86a3;
+  --wa: #25d366;
+  /* glass */
+  --glass: rgba(255, 255, 255, 0.055);
+  --glass-hi: rgba(255, 255, 255, 0.09);
+  --edge: rgba(192, 132, 252, 0.38);
+  --blur: 22px;
+  /* type */
+  --f-display: "Anton", "Impact", "Haettenschweiler", "Arial Narrow Bold", sans-serif;
+  --f-head: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  /* scale */
+  --r-lg: 28px;
+  --r-md: 22px;
+  --r-sm: 14px;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  --wrap: 1200px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--void); }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+::selection { background: var(--violet); color: #fff; }
+:focus-visible { outline: 2px solid var(--lilac); outline-offset: 3px; border-radius: 10px; }
+
+/* ---------- atmosphere ---------- */
+.sky { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background:
+  radial-gradient(1200px 700px at 70% -10%, rgba(124, 58, 237, 0.28), transparent 60%),
+  radial-gradient(900px 600px at -10% 40%, rgba(88, 28, 135, 0.35), transparent 60%),
+  linear-gradient(180deg, var(--void) 0%, var(--void-2) 55%, var(--void) 100%); }
+/* deep glossy black glass back wall */
+.wall { position: absolute; inset: 0; overflow: hidden;
+  background:
+    radial-gradient(110% 80% at 50% 36%, transparent 22%, rgba(0, 0, 0, 0.75) 66%, #000 100%); }
+/* the polished surface of the wall, drawn above the frost so it stays crisp */
+.gloss { position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  background:
+    radial-gradient(95% 75% at 50% 34%, transparent 40%, rgba(0, 0, 0, 0.55) 78%, rgba(0, 0, 0, 0.9) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 160px 40px rgba(0, 0, 0, 0.85); }
+.gloss::before { /* bold diagonal specular band, like a studio light on black glass */
+  content: ""; position: absolute; inset: -30%;
+  background:
+    linear-gradient(115deg, transparent 33%, rgba(255, 255, 255, 0.05) 39%, rgba(255, 255, 255, 0.16) 42.5%, rgba(255, 255, 255, 0.05) 45%, transparent 50%),
+    linear-gradient(115deg, transparent 54%, rgba(255, 255, 255, 0.07) 56.5%, transparent 58.5%),
+    linear-gradient(115deg, transparent 12%, rgba(255, 255, 255, 0.04) 15%, transparent 18%);
+  animation: gloss 30s ease-in-out infinite alternate;
+}
+.gloss::after { /* soft reflected glow low in the glass, blended with no hard edges */
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(50% 30% at 72% 74%, rgba(217, 70, 239, 0.16), transparent 75%),
+    radial-gradient(36% 24% at 20% 78%, rgba(251, 191, 36, 0.09), transparent 75%),
+    linear-gradient(180deg, transparent 45%, rgba(255, 255, 255, 0.025) 68%, transparent 88%),
+    linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.7) 100%);
+}
+.gloss i { /* soft vertical reflection streaks across the glass */
+  position: absolute; top: 0; bottom: 0; width: 18%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.035), transparent);
+}
+.gloss i:nth-child(1) { left: 8%; }
+.gloss i:nth-child(2) { left: 58%; width: 10%; }
+@keyframes gloss { from { transform: translate3d(-3%, 0, 0); } to { transform: translate3d(4%, 0, 0); } }
+.blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; will-change: transform; }
+.b1 { width: 520px; height: 520px; left: -140px; top: -160px; background: radial-gradient(circle at 40% 40%, var(--sun), #f97316 45%, transparent 70%); opacity: 0.42; animation: drift1 26s ease-in-out infinite alternate; }
+.b2 { width: 560px; height: 760px; right: -220px; top: 10vh; background: radial-gradient(circle at 50% 30%, var(--sky), var(--magenta) 45%, var(--violet) 70%, transparent 78%); opacity: 0.5; animation: drift2 30s ease-in-out infinite alternate; }
+.b3 { width: 620px; height: 620px; left: 20%; bottom: -320px; background: radial-gradient(circle, var(--violet-2), var(--violet) 40%, transparent 70%); opacity: 0.5; animation: drift1 34s ease-in-out infinite alternate-reverse; }
+@keyframes drift1 { to { transform: translate3d(60px, 40px, 0) scale(1.08); } }
+@keyframes drift2 { to { transform: translate3d(-50px, -30px, 0) scale(1.06) rotate(8deg); } }
+
+/* liquid black glass: a dark, glossy sheet the colour glows through */
+.liquid { position: absolute; inset: 0; overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(1, 0, 2, 0.58), rgba(1, 0, 2, 0.70) 55%, rgba(0, 0, 0, 0.80));
+  -webkit-backdrop-filter: blur(28px) saturate(150%) contrast(1.05);
+          backdrop-filter: blur(28px) saturate(150%) contrast(1.05); }
+.liquid::before { /* slow moving glossy reflections, like light rolling over wet glass */
+  content: ""; position: absolute; inset: -40%;
+  background:
+    radial-gradient(38% 12% at 30% 22%, rgba(255, 255, 255, 0.10), transparent 70%),
+    radial-gradient(30% 9% at 72% 58%, rgba(255, 255, 255, 0.07), transparent 70%),
+    radial-gradient(45% 14% at 40% 82%, rgba(255, 255, 255, 0.05), transparent 70%),
+    conic-gradient(from 210deg at 60% 40%, transparent 0deg, rgba(255, 255, 255, 0.05) 40deg, transparent 90deg, rgba(192, 132, 252, 0.06) 200deg, transparent 260deg);
+  mix-blend-mode: screen;
+  animation: sheen 38s ease-in-out infinite alternate;
+}
+.liquid::after { /* thin curved highlight edges, like the rim of a glass ripple */
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 60% at 50% -20%, transparent 52%, rgba(255, 255, 255, 0.05) 59.5%, transparent 67%),
+    radial-gradient(90% 50% at 110% 75%, transparent 56%, rgba(255, 255, 255, 0.035) 63.5%, transparent 71%),
+    radial-gradient(80% 45% at -10% 55%, transparent 54%, rgba(192, 132, 252, 0.05) 61.5%, transparent 69%);
+  animation: ripple 24s ease-in-out infinite alternate;
+}
+@keyframes sheen { to { transform: translate3d(6%, 4%, 0) rotate(8deg) scale(1.05); } }
+@keyframes ripple { to { transform: translate3d(0, -3%, 0) scale(1.04); } }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .liquid { background: rgba(5, 2, 8, 0.45); }
+}
+.grain { position: absolute; inset: -50%; opacity: 0.07; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* ---------- layout ---------- */
+.wrap { position: relative; z-index: 1; width: 100%; max-width: var(--wrap); margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+section { position: relative; z-index: 1; padding-block: clamp(72px, 10vw, 128px); }
+.label { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lilac); display: inline-flex; align-items: center; gap: 10px; }
+.label::before { content: ""; width: 22px; height: 1px; background: currentColor; opacity: 0.7; }
+.display { font-family: var(--f-display); font-weight: 400; text-transform: uppercase; line-height: 0.92; letter-spacing: 0.005em; margin: 0; text-wrap: balance; }
+.h2 { font-size: clamp(44px, 7.4vw, 96px); margin-top: 18px; }
+.lede { color: var(--ink-2); font-size: clamp(16px, 1.6vw, 19px); max-width: 60ch; margin: 22px 0 0; }
+.glow-text { background: linear-gradient(100deg, var(--lilac), var(--magenta) 45%, var(--sky)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- liquid glass ---------- */
+.glass {
+  position: relative;
+  background: linear-gradient(160deg, var(--glass-hi), var(--glass) 40%, rgba(255, 255, 255, 0.025));
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(160%);
+          backdrop-filter: blur(var(--blur)) saturate(160%);
+  border-radius: var(--r-lg);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 0 24px rgba(192, 132, 252, 0.06),
+    0 20px 60px -20px rgba(0, 0, 0, 0.8),
+    0 2px 10px rgba(0, 0, 0, 0.35);
+  isolation: isolate;
+}
+.glass::before { /* 1px luminous edge */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.45), var(--edge) 30%, rgba(124, 58, 237, 0.08) 60%, rgba(56, 189, 248, 0.25));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.glass::after { /* cursor aware light + lensing sheen */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1;
+  background:
+    radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(168, 85, 247, 0.18), transparent 45%),
+    linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.05) 45%, transparent 55%);
+  opacity: 0.8; transition: opacity 0.35s;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: rgba(22, 12, 38, 0.92); }
+}
+.lift { transition: transform 0.35s cubic-bezier(.2, .7, .2, 1), box-shadow 0.35s, background 0.35s; }
+.lift:hover { transform: translateY(-4px); background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.03)); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 30px 80px -24px rgba(124, 58, 237, 0.55), 0 2px 10px rgba(0,0,0,.35); }
+
+/* ---------- buttons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 999px; font-family: var(--f-head); font-weight: 600; font-size: 15px; text-decoration: none; cursor: pointer; border: 0; transition: transform .25s, box-shadow .25s, background .25s; white-space: nowrap; }
+.btn:active { transform: scale(.98); }
+.btn-primary { position: relative; color: #fff; background: linear-gradient(120deg, var(--violet), var(--electric) 40%, var(--magenta)); background-size: 200% 100%; box-shadow: 0 0 0 1px rgba(255,255,255,.18) inset, 0 10px 40px -8px rgba(168, 85, 247, .75); animation: shimmer 6s linear infinite; }
+.btn-primary:hover { box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset, 0 14px 50px -6px rgba(217, 70, 239, .8); transform: translateY(-2px); }
+@keyframes shimmer { 0% { background-position: 0% 0; } 50% { background-position: 100% 0; } 100% { background-position: 0% 0; } }
+.btn-ghost { color: var(--ink); background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.btn-ghost:hover { background: rgba(255,255,255,.12); transform: translateY(-2px); }
+.btn-wa { color: #04140a; background: var(--wa); box-shadow: 0 10px 40px -10px rgba(37, 211, 102, .7); }
+.btn-wa:hover { transform: translateY(-2px); box-shadow: 0 14px 50px -8px rgba(37, 211, 102, .85); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+
+/* ---------- nav ---------- */
+.nav-shell { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; padding-top: 14px; }
+.nav { display: flex; align-items: center; gap: 18px; padding: 10px 10px 10px 18px; border-radius: 999px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
+.brand img { height: 30px; width: auto; }
+.brand span { font-family: var(--f-head); font-weight: 600; letter-spacing: 0.28em; font-size: 13px; }
+.nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.nav ul a { display: block; padding: 10px 14px; border-radius: 999px; text-decoration: none; color: var(--ink-2); font-size: 14px; font-weight: 500; transition: color .2s, background .2s; }
+.nav ul a:hover { color: var(--ink); background: rgba(255,255,255,.07); }
+.menu-btn { display: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.08); color: var(--ink); cursor: pointer; }
+.menu-btn svg { width: 20px; height: 20px; }
+
+/* ---------- hero ---------- */
+.hero { padding-block: clamp(48px, 7vw, 96px) clamp(64px, 8vw, 110px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(32px, 5vw, 64px); align-items: center; }
+.hero-grid > div { min-width: 0; }
+.hero h1 { font-size: clamp(48px, 7.4vw, 112px); margin-top: 22px; }
+.hero h1 .glow-text { display: inline; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.trust { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 34px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.trust span { display: inline-flex; align-items: center; gap: 8px; }
+.trust span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--lilac); box-shadow: 0 0 10px var(--lilac); }
+
+/* hero mockup */
+.stage { position: relative; min-height: 460px; width: 100%; }
+.mock { position: absolute; inset: 20px 0 auto 0; padding: 14px; animation: float 8s ease-in-out infinite; }
+.mock-bar { display: flex; align-items: center; gap: 7px; padding: 4px 6px 12px; }
+.mock-bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.25); }
+.mock-bar b { margin-left: 10px; flex: 1; height: 24px; border-radius: 999px; background: rgba(255,255,255,.07); font: 500 11px var(--f-mono); color: var(--ink-3); display: flex; align-items: center; padding: 0 12px; letter-spacing: .04em; }
+.mock-screen { border-radius: 18px; overflow: hidden; background: linear-gradient(135deg, #1b0b33, #0b0418 60%); position: relative; aspect-ratio: 4 / 3; max-width: 100%; }
+.mock-screen::before { content: ""; position: absolute; width: 70%; height: 90%; right: -18%; top: -20%; border-radius: 50%; background: radial-gradient(circle at 40% 40%, var(--magenta), var(--violet) 50%, transparent 72%); filter: blur(30px); opacity: .8; }
+.mock-screen::after { content: ""; position: absolute; width: 50%; height: 60%; left: -12%; bottom: -24%; border-radius: 50%; background: radial-gradient(circle, var(--sun), #f97316 50%, transparent 72%); filter: blur(34px); opacity: .45; }
+.mock-copy { position: absolute; left: 7%; top: 14%; right: 40%; z-index: 1; display: grid; gap: 10px; }
+.mock-copy .mk-h { font-family: var(--f-display); font-size: clamp(22px, 2.6vw, 34px); line-height: .95; text-transform: uppercase; }
+.mk-line { height: 7px; border-radius: 4px; background: rgba(255,255,255,.22); }
+.mk-pill { width: 46%; height: 22px; border-radius: 999px; background: linear-gradient(90deg, var(--violet), var(--magenta)); margin-top: 6px; }
+.chip { position: absolute; padding: 14px 16px; border-radius: var(--r-md); display: grid; gap: 4px; animation: float 7s ease-in-out infinite; }
+.chip small { font: 500 10px var(--f-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
+.chip strong { font-family: var(--f-head); font-size: 18px; font-weight: 600; white-space: nowrap; }
+.chip-a { left: -18px; bottom: 30px; animation-delay: -2s; }
+.chip-b { right: -10px; bottom: -6px; animation-delay: -4s; grid-template-columns: auto auto; align-items: center; gap: 4px 12px; }
+.ring { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--wa) 0 97%, rgba(255,255,255,.1) 0); }
+.ring span { width: 42px; height: 42px; border-radius: 50%; background: #120724; display: grid; place-items: center; font: 600 15px var(--f-head); }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+/* ---------- statement band ---------- */
+.band { padding-block: 26px; border-block: 1px solid rgba(192,132,252,.14); overflow: hidden; position: relative; z-index: 1; background: rgba(5, 2, 8, .55); }
+.marquee { display: flex; gap: 48px; width: max-content; animation: marquee 32s linear infinite; }
+.marquee span { font-family: var(--f-display); text-transform: uppercase; font-size: clamp(28px, 4vw, 52px); white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(245, 243, 255, .55); }
+.marquee span:nth-child(odd) { color: var(--ink); -webkit-text-stroke: 0; }
+.marquee em { font-style: normal; color: var(--lilac); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- services ---------- */
+.cards-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 56px; }
+.svc { padding: 28px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.icon { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: linear-gradient(140deg, rgba(168,85,247,.35), rgba(56,189,248,.12)); box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 0 30px -6px rgba(168,85,247,.7); }
+.icon svg { width: 24px; height: 24px; stroke: var(--ink); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.svc h3, .work h3, .step h3, .why h3 { font-family: var(--f-head); font-weight: 600; font-size: 20px; margin: 0; letter-spacing: -.01em; }
+.svc p, .step p, .why p { margin: 0; color: var(--ink-2); font-size: 15px; }
+.svc .tag { font: 500 11px var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+
+/* ---------- work ---------- */
+.work-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 56px; }
+.work { padding: 12px; display: grid; gap: 0; min-width: 0; text-decoration: none; overflow: hidden; }
+.shot { position: relative; border-radius: 20px; aspect-ratio: 4 / 5; max-width: 100%; overflow: hidden; }
+.shot .art { position: absolute; inset: 0; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.work:hover .shot .art { transform: scale(1.06); }
+.art-1 { background: radial-gradient(60% 50% at 70% 25%, #f0abfc, transparent 70%), radial-gradient(70% 60% at 20% 80%, #7c3aed, transparent 70%), linear-gradient(160deg, #1a0a2e, #06020c); }
+.art-2 { background: radial-gradient(60% 50% at 25% 30%, #38bdf8, transparent 70%), radial-gradient(70% 60% at 80% 85%, #8b5cf6, transparent 70%), linear-gradient(200deg, #0a1030, #05020c); }
+.art-3 { background: radial-gradient(55% 45% at 75% 70%, #fbbf24, transparent 70%), radial-gradient(70% 60% at 25% 25%, #d946ef, transparent 70%), linear-gradient(160deg, #24081f, #07020b); }
+.ui { position: absolute; inset: 16% 12% auto; display: grid; gap: 9px; z-index: 1; }
+.ui .t { font-family: var(--f-display); font-size: clamp(26px, 3vw, 38px); line-height: .92; text-transform: uppercase; }
+.ui .l { height: 6px; border-radius: 3px; background: rgba(255,255,255,.35); }
+.ui .l.s { width: 60%; }
+.ui .p { width: 48%; height: 20px; border-radius: 999px; background: rgba(255,255,255,.9); margin-top: 6px; }
+.caption { position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 16px 18px; border-radius: 18px; display: grid; gap: 6px; transform: translateY(6px); transition: transform .4s; }
+.work:hover .caption { transform: translateY(0); }
+.caption .meta { display: flex; justify-content: space-between; gap: 10px; font: 500 11px var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+.caption .goal { font-size: 14px; color: var(--ink-2); }
+.caption .more { font: 600 13px var(--f-head); color: var(--lilac); }
+.note { margin-top: 18px; font-size: 13px; color: var(--ink-3); }
+
+/* ---------- process ---------- */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 64px; position: relative; }
+.steps::before { content: ""; position: absolute; left: 4%; right: 4%; top: 36px; height: 2px; background: linear-gradient(90deg, transparent, rgba(192,132,252,.25) 10%, rgba(192,132,252,.25) 90%, transparent); }
+.steps::after { content: ""; position: absolute; left: 4%; top: 36px; height: 2px; width: 30%; background: linear-gradient(90deg, transparent, var(--lilac), var(--magenta), transparent); animation: run 5s ease-in-out infinite; filter: drop-shadow(0 0 6px var(--magenta)); }
+@keyframes run { 0% { transform: translateX(0); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateX(220%); opacity: 0; } }
+.step { padding: 26px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.num { width: 72px; height: 72px; margin: -62px 0 6px; border-radius: 22px; display: grid; place-items: center; font-family: var(--f-display); font-size: 30px; }
+
+/* ---------- studio ---------- */
+.studio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; margin-top: 56px; }
+.offer { padding: clamp(26px, 3.5vw, 40px); display: grid; gap: 22px; }
+.price { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.price div { padding: 20px; border-radius: var(--r-md); background: rgba(255,255,255,.04); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+.price small { font: 500 11px var(--f-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+.price strong { display: block; font-family: var(--f-display); font-size: clamp(40px, 5vw, 58px); line-height: 1; margin-top: 8px; font-weight: 400; }
+.price strong sup { font-size: .38em; vertical-align: .9em; margin-right: 2px; }
+.price strong em { font-style: normal; font-family: var(--f-body); font-size: 15px; color: var(--ink-2); margin-left: 4px; }
+.price p { margin: 8px 0 0; color: var(--ink-2); font-size: 14px; }
+.ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ticks li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; color: var(--ink-2); font-size: 15px; }
+.ticks svg { width: 20px; height: 20px; stroke: var(--wa); fill: none; stroke-width: 2.2; margin-top: 2px; }
+.why-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.why { padding: 22px; display: grid; gap: 8px; min-width: 0; }
+
+/* ---------- promise (owner's note) ---------- */
+.promise { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 56px; }
+.quote { padding: 34px 28px 28px; display: grid; gap: 18px; align-content: space-between; min-width: 0; }
+.quote .qm { font-family: var(--f-display); font-size: 84px; line-height: .6; height: 36px; color: var(--lilac); text-shadow: 0 0 24px rgba(192,132,252,.9), 0 0 60px rgba(217,70,239,.5); }
+.quote p { margin: 0; font-family: var(--f-head); font-size: 19px; line-height: 1.45; font-weight: 500; }
+.quote footer { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink-2); }
+.quote footer img { width: 34px; height: 34px; object-fit: contain; border-radius: 10px; background: rgba(255,255,255,.06); padding: 5px; }
+
+/* ---------- cta ---------- */
+.cta { overflow: hidden; }
+.burst { position: absolute; inset: 0; z-index: 0; pointer-events: none; background:
+  radial-gradient(40% 55% at 50% 55%, rgba(168,85,247,.55), transparent 70%),
+  radial-gradient(25% 30% at 50% 55%, rgba(217,70,239,.45), transparent 70%),
+  radial-gradient(60% 70% at 50% 60%, rgba(124,58,237,.25), transparent 75%); filter: blur(10px); }
+.cta-card { padding: clamp(28px, 5vw, 64px); display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
+.cta h2 { font-size: clamp(48px, 7vw, 92px); margin-top: 16px; }
+.contact-lines { display: grid; gap: 12px; margin-top: 28px; }
+.line { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-family: var(--f-mono); font-size: 15px; color: var(--ink-2); }
+.line strong { color: var(--ink); font-weight: 500; user-select: all; }
+.copy { font: 600 12px var(--f-head); color: var(--ink); background: rgba(255,255,255,.08); border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.copy:hover { background: rgba(255,255,255,.16); }
+form { display: grid; gap: 14px; }
+.field { display: grid; gap: 6px; }
+.field label { font: 500 11px var(--f-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+.field input, .field select, .field textarea { width: 100%; font: 400 16px var(--f-body); color: var(--ink); background: rgba(255,255,255,.05); border: 1px solid rgba(192,132,252,.22); border-radius: var(--r-sm); padding: 13px 14px; transition: border-color .2s, background .2s; }
+.field textarea { min-height: 96px; resize: vertical; }
+.field select option { background: #12071f; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--lilac); background: rgba(255,255,255,.08); box-shadow: 0 0 0 4px rgba(168,85,247,.18); }
+.form-note { font-size: 13px; color: var(--ink-3); margin: 0; }
+
+/* ---------- footer ---------- */
+footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid rgba(192,132,252,.14); background: rgba(5,2,8,.6); }
+.foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+.foot img { height: 96px; width: auto; }
+.foot p { color: var(--ink-3); font-size: 14px; max-width: 34ch; margin: 18px 0 0; }
+.foot h4 { margin: 0 0 14px; font: 500 11px var(--f-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--lilac); }
+.foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.foot a { color: var(--ink-2); text-decoration: none; font-size: 14px; }
+.foot a:hover { color: var(--ink); }
+.legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font: 400 12px var(--f-mono); color: var(--ink-3); letter-spacing: .06em; }
+
+/* floating WhatsApp */
+.wa-float { position: fixed; z-index: 55; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: var(--wa); color: #04140a; box-shadow: 0 10px 40px -6px rgba(37,211,102,.75), inset 0 1px 0 rgba(255,255,255,.4); transition: transform .25s; }
+.wa-float:hover { transform: scale(1.08); }
+.wa-float svg { width: 28px; height: 28px; }
+
+/* reveal: content is always visible; motion only adds a gentle rise */
+.reveal { transition: transform .9s cubic-bezier(.2,.7,.2,1), opacity .9s; }
+.js .reveal:not(.in) { transform: translateY(24px); opacity: .35; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1024px) {
+  .cards-3, .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 72px; }
+  .steps::before, .steps::after { display: none; }
+  .promise { grid-template-columns: 1fr; }
+  .foot { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .hero-grid, .studio-grid, .cta-card { grid-template-columns: 1fr; }
+  .stage { min-height: 400px; max-width: 520px; justify-self: center; }
+  .nav ul { display: none; position: absolute; left: 0; right: 0; top: calc(100% + 10px); flex-direction: column; padding: 10px; border-radius: 24px; background: rgba(14, 7, 26, .92); -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); box-shadow: inset 0 0 0 1px rgba(192,132,252,.25), 0 30px 60px -20px #000; }
+  .nav ul.open { display: flex; }
+  .nav ul a { padding: 14px 16px; font-size: 16px; }
+  .menu-btn { display: grid; place-items: center; }
+  .nav .btn-primary { display: none; }
+  .nav { position: relative; }
+}
+@media (max-width: 600px) {
+  .cards-3, .work-grid, .steps, .why-list, .price { grid-template-columns: 1fr; }
+  .foot { grid-template-columns: 1fr; }
+  .chip-a { left: 0; }
+  .chip-b { right: 0; }
+  .brand span { display: none; }
+  .btn { width: 100%; }
+  .cta-row .btn { width: auto; flex: 1 1 200px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .js .reveal:not(.in) { transform: none; opacity: 1; }
+}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true">
+  <div class="wall"></div>
+  <div class="blob b1" data-depth="0.08"></div>
+  <div class="blob b2" data-depth="-0.06"></div>
+  <div class="blob b3" data-depth="0.04"></div>
+  <div class="liquid"></div>
+  <div class="gloss"><i></i><i></i></div>
+  <div class="grain"></div>
+</div>
+
+<!-- ============ NAVIGATION ============ -->
+<div class="nav-shell wrap">
+  <nav class="nav glass" aria-label="Main">
+    <a class="brand" href="#top" aria-label="Triage Web Studios home">
+      <!-- Brand asset: replace assets/triage-mark.png if the logo is updated -->
+      <img src="assets/triage-mark.png" alt="" width="26" height="30">
+      <span>TRIAGE</span>
+    </a>
+    <ul id="menu">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#contact">Start a project</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </nav>
+</div>
+
+<main id="top">
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <span class="label">Web studio · Cape Town</span>
+        <h1 class="display">We build web experiences that move <span class="glow-text">businesses forward.</span></h1>
+        <p class="lede">Triage Web Studios designs and develops fast, beautiful, scalable websites and web applications for ambitious brands. We build your website first. You only pay if you love it.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Start a project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="#work">View our work</a>
+        </div>
+        <div class="trust"><span>Cape Town</span><span>South Africa</span><span>Performance first</span></div>
+      </div>
+
+      <div class="stage reveal" aria-hidden="true">
+        <div class="mock glass" data-glow>
+          <div class="mock-bar"><i></i><i></i><i></i><b>yourbusiness.co.za</b></div>
+          <div class="mock-screen">
+            <div class="mock-copy">
+              <div class="mk-h">Your brand, online and booking</div>
+              <div class="mk-line"></div>
+              <div class="mk-line" style="width:72%"></div>
+              <div class="mk-pill"></div>
+            </div>
+          </div>
+        </div>
+        <div class="chip chip-a glass"><small>You pay upfront</small><strong>R0</strong></div>
+        <div class="chip chip-b glass"><div class="ring"><span>97</span></div><div><small>Speed target</small><strong>Mobile first</strong></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATEMENT ============ -->
+  <div class="band" aria-label="Made by professionals. Built for you.">
+    <div class="marquee" aria-hidden="true">
+      <span>Made by professionals</span><span>Built for <em>you</em></span><span>Made by professionals</span><span>Built for <em>you</em></span>
+      <span>Made by professionals</span><span>Built for <em>you</em></span><span>Made by professionals</span><span>Built for <em>you</em></span>
+    </div>
+  </div>
+
+  <!-- ============ SERVICES ============ -->
+  <section id="services">
+    <div class="wrap">
+      <span class="label reveal">Capabilities</span>
+      <h2 class="display h2 reveal">Everything your business needs <span class="glow-text">online.</span></h2>
+      <div class="cards-3">
+        <article class="svc glass lift reveal" data-glow>
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg></div>
+          <span class="tag">Websites</span>
+          <h3>Custom Web Development</h3>
+          <p>Hand built sites that load fast, look sharp on every phone and turn visitors into enquiries.</p>
+        </article>
+        <article class="svc glass lift reveal" data-glow>
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M3 9h18M8 21h8"/></svg></div>
+          <span class="tag">Apps</span>
+          <h3>Web Application Engineering</h3>
+          <p>Booking systems, client portals and dashboards that automate the work you do by hand today.</p>
+        </article>
+        <article class="svc glass lift reveal" data-glow>
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 9h-11z"/><path d="M9 7a3 3 0 016 0"/><circle cx="9" cy="20" r="1"/><circle cx="16" cy="20" r="1"/></svg></div>
+          <span class="tag">Commerce</span>
+          <h3>E-commerce Experiences</h3>
+          <p>Online stores and order forms that make buying simple, with payments and WhatsApp built in.</p>
+        </article>
+        <article class="svc glass lift reveal" data-glow>
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><circle cx="16.5" cy="16.5" r="3.5"/></svg></div>
+          <span class="tag">Design</span>
+          <h3>UI/UX &amp; Design Systems</h3>
+          <p>Clear layouts, a consistent brand and reusable components so every page feels like you.</p>
+        </article>
+        <article class="svc glass lift reveal" data-glow>
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 14a8 8 0 1116 0"/><path d="M12 14l4-5"/><path d="M4 18h16"/></svg></div>
+          <span class="tag">Speed</span>
+          <h3>Performance &amp; Core Web Vitals</h3>
+          <p>Lean code and optimised images, so your site opens instantly on South African mobile data.</p>
+        </article>
+        <article class="svc glass lift reveal" data-glow>
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5M8.5 12.5l2-2 1.5 1.5 2.5-3"/></svg></div>
+          <span class="tag">Growth</span>
+          <h3>SEO, Analytics &amp; Conversion</h3>
+          <p>Get found on Google, see what visitors do and keep improving the pages that bring in clients.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORK ============ -->
+  <section id="work">
+    <div class="wrap">
+      <span class="label reveal">The outcome</span>
+      <h2 class="display h2 reveal">More than a website. <span class="glow-text">Real results.</span></h2>
+      <div class="work-grid">
+        <!-- Outcome cards. Add real client case studies here as projects launch. -->
+        <a class="work glass lift reveal" href="#contact" data-glow>
+          <div class="shot"><div class="art art-1"></div>
+            <div class="ui"><div class="t">New clients, every week</div><div class="l"></div><div class="l s"></div><div class="p"></div></div>
+            <div class="caption glass"><div class="meta"><span>Outcome</span><span>01</span></div><h3>New paying clients</h3><div class="goal">Clear calls to action, click to WhatsApp and enquiry forms that turn visitors into paying customers.</div><span class="more">Start getting clients →</span></div>
+          </div>
+        </a>
+        <a class="work glass lift reveal" href="#contact" data-glow>
+          <div class="shot"><div class="art art-2"></div>
+            <div class="ui"><div class="t">Trusted from the first click</div><div class="l"></div><div class="l s"></div><div class="p"></div></div>
+            <div class="caption glass"><div class="meta"><span>Outcome</span><span>02</span></div><h3>More trust</h3><div class="goal">A professional, modern website makes customers trust you before they even pick up the phone.</div><span class="more">Look the part →</span></div>
+          </div>
+        </a>
+        <a class="work glass lift reveal" href="#contact" data-glow>
+          <div class="shot"><div class="art art-3"></div>
+            <div class="ui"><div class="t">Found on Google</div><div class="l"></div><div class="l s"></div><div class="p"></div></div>
+            <div class="caption glass"><div class="meta"><span>Outcome</span><span>03</span></div><h3>Easy to discover</h3><div class="goal">SEO built in, so the people searching for what you offer find your business, not your competitors.</div><span class="more">Get found →</span></div>
+          </div>
+        </a>
+      </div>
+      <p class="note reveal">Every Triage website is built around these three outcomes: new paying clients, more trust and easier discovery.</p>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section id="process">
+    <div class="wrap">
+      <span class="label reveal">The Triage Method</span>
+      <h2 class="display h2 reveal">Four steps from idea <span class="glow-text">to launch.</span></h2>
+      <div class="steps">
+        <article class="step glass lift reveal" data-glow><div class="num glass">01</div><h3>Diagnose</h3><p>We learn your business, your customers and what is holding your online presence back.</p></article>
+        <article class="step glass lift reveal" data-glow><div class="num glass">02</div><h3>Prioritise</h3><p>We agree the pages and features that will bring in the most work, first.</p></article>
+        <article class="step glass lift reveal" data-glow><div class="num glass">03</div><h3>Build</h3><p>We design and build your site, and you see the real thing before you pay anything.</p></article>
+        <article class="step glass lift reveal" data-glow><div class="num glass">04</div><h3>Scale</h3><p>We launch, measure what works and keep improving it on your care plan.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STUDIO / WHY TRIAGE ============ -->
+  <section id="studio">
+    <div class="wrap">
+      <span class="label reveal">Why Triage</span>
+      <h2 class="display h2 reveal">Zero risk. <span class="glow-text">All craft.</span></h2>
+      <div class="studio-grid">
+        <div class="offer glass reveal" data-glow>
+          <span class="label">The launch offer</span>
+          <div class="price">
+            <div><small>Your website</small><strong><sup>R</sup>2 000</strong><p>Once off, only when you are happy with it.</p></div>
+            <div><small>Care plan</small><strong><sup>R</sup>350<em>/month</em></strong><p>Domain, hosting and updates handled.</p></div>
+          </div>
+          <ul class="ticks">
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>We build your site first, before you pay a cent.</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Not happy with it? You owe us nothing.</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Mobile first, fast and ready for Google.</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>WhatsApp and enquiry buttons on every page.</li>
+          </ul>
+          <a class="btn btn-primary" href="#contact">Get my free sample</a>
+        </div>
+        <div class="why-list">
+          <article class="why glass lift reveal" data-glow><h3>Hands on studio</h3><p>You deal directly with the person designing and building your site.</p></article>
+          <article class="why glass lift reveal" data-glow><h3>Performance first</h3><p>Every page is built light, so it opens fast on any phone and any network.</p></article>
+          <article class="why glass lift reveal" data-glow><h3>Built to convert</h3><p>Clear calls to action, click to WhatsApp and enquiry forms where they matter.</p></article>
+          <article class="why glass lift reveal" data-glow><h3>Room to grow</h3><p>Start with a site, add bookings, a store or automation when you need them.</p></article>
+          <article class="why glass lift reveal" data-glow><h3>Straight talk</h3><p>Clear prices, no jargon and a real person on WhatsApp when you need help.</p></article>
+          <article class="why glass lift reveal" data-glow><h3>Cape Town craft</h3><p>Local understanding of South African customers, built to global standards.</p></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROMISE (owner's note) ============ -->
+  <!-- Replace these with genuine client testimonials (with permission) once projects launch. -->
+  <section id="promise">
+    <div class="wrap">
+      <span class="label reveal">Our promise</span>
+      <h2 class="display h2 reveal">Straight from <span class="glow-text">the studio.</span></h2>
+      <div class="promise">
+        <figure class="quote glass lift reveal" data-glow style="margin:0">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>You see your finished website before you pay anything. If it is not right for you, you walk away and owe nothing.</p>
+          <footer><img src="assets/triage-mark.png" alt=""><span>Zambezi Heldsinger, Owner</span></footer>
+        </figure>
+        <figure class="quote glass lift reveal" data-glow style="margin:0">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>Your site is built for the way South Africans actually find businesses: on a phone, on Google, then straight to WhatsApp.</p>
+          <footer><img src="assets/triage-mark.png" alt=""><span>Zambezi Heldsinger, Owner</span></footer>
+        </figure>
+        <figure class="quote glass lift reveal" data-glow style="margin:0">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>After launch you are not on your own. The care plan keeps your domain, hosting and updates handled every month.</p>
+          <footer><img src="assets/triage-mark.png" alt=""><span>Zambezi Heldsinger, Owner</span></footer>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA / CONTACT ============ -->
+  <section id="contact" class="cta">
+    <div class="burst" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="cta-card glass reveal" data-glow>
+        <div>
+          <span class="label">Start a project</span>
+          <h2 class="display">Let's triage your <span class="glow-text">next big idea.</span></h2>
+          <p class="lede">Tell us about your project and we'll map the fastest route from concept to launch.</p>
+          <div class="cta-row">
+            <a class="btn btn-wa" href="https://wa.me/27647081072?text=Hi%20Triage%20Web%20Studios%2C%20I'd%20like%20to%20book%20a%20discovery%20call." target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.9 11.9 0 004.6 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 001.8-1.3 2.3 2.3 0 00.2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+              Book a discovery call</a>
+          </div>
+          <div class="contact-lines">
+            <div class="line">WhatsApp <strong>+27 64 708 1072</strong><button class="copy" type="button" data-copy="+27 64 708 1072">Copy</button></div>
+            <div class="line">Website <strong>triagewebstudios.co.za</strong><button class="copy" type="button" data-copy="triagewebstudios.co.za">Copy</button></div>
+          </div>
+        </div>
+        <form id="brief" novalidate>
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required placeholder="e.g. Thabo"></div>
+          <div class="field"><label for="f-biz">Business name</label><input id="f-biz" name="business" autocomplete="organization" required placeholder="Your business name"></div>
+          <div class="field"><label for="f-need">What do you need?</label>
+            <select id="f-need" name="need">
+              <option>A new website</option><option>A redesign of my website</option><option>Online bookings</option><option>An online store</option><option>Something else</option>
+            </select></div>
+          <div class="field"><label for="f-msg">Tell us a little more</label><textarea id="f-msg" name="message" placeholder="What does your business do, and what should the site help you achieve?"></textarea></div>
+          <button class="btn btn-primary" type="submit">Send brief on WhatsApp
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="form-note" id="formNote">Opens WhatsApp with your brief filled in, ready to send to +27 64 708 1072.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <img src="assets/triage-logo.png" alt="Triage Web Studios, Scale Smart" width="148" height="96">
+        <p>A modern web studio turning ambitious ideas into fast, beautiful, conversion focused websites.</p>
+      </div>
+      <div><h4>Studio</h4><ul><li><a href="#work">Work</a></li><li><a href="#services">Services</a></li><li><a href="#process">Process</a></li><li><a href="#studio">Why Triage</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="https://wa.me/27647081072" target="_blank" rel="noopener">WhatsApp +27 64 708 1072</a></li><li><a href="#contact">Start a project</a></li><li><span style="color:var(--ink-3);font-size:14px">Cape Town, South Africa</span></li></ul></div>
+      <!-- Add real social profile URLs when they exist -->
+      <div><h4>Social</h4><ul><li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Triage Web Studios</span><span>Scale smart.</span></div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/27647081072" target="_blank" rel="noopener" aria-label="Chat with Triage Web Studios on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.9 11.9 0 004.6 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 001.8-1.3 2.3 2.3 0 00.2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+</a>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.classList.add('js');
+
+  // Mobile menu
+  var btn = document.getElementById('menuBtn'), menu = document.getElementById('menu');
+  btn.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
+
+  // Scroll reveals (content stays readable even if this never runs)
+  var items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight) el.classList.add('in'); else io.observe(el);
+    });
+  } else { items.forEach(function (el) { el.classList.add('in'); }); }
+
+  // Cursor aware glow on glass
+  document.querySelectorAll('[data-glow]').forEach(function (el) {
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // Gentle parallax on the light field
+  if (!reduce) {
+    var blobs = document.querySelectorAll('.blob'), ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.scrollY;
+        blobs.forEach(function (b) { b.style.translate = '0 ' + (y * parseFloat(b.dataset.depth)) + 'px'; });
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  // Copy buttons
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var text = b.getAttribute('data-copy');
+      var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1600); };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(done).catch(function () { selectText(b.previousElementSibling); });
+      } else selectText(b.previousElementSibling);
+    });
+  });
+  function selectText(el) { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+  // Brief form -> WhatsApp message (no server needed)
+  var form = document.getElementById('brief'), note = document.getElementById('formNote');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = form.name.value.trim(), biz = form.business.value.trim();
+    if (!name || !biz) { note.textContent = 'Please add your name and business name so we know who you are.'; note.style.color = 'var(--lilac)'; (name ? form.business : form.name).focus(); return; }
+    var msg = 'Hi Triage Web Studios, I\'m ' + name + ' from ' + biz + '.\nI need: ' + form.need.value + '.' + (form.message.value.trim() ? '\n' + form.message.value.trim() : '');
+    var url = 'https://wa.me/27647081072?text=' + encodeURIComponent(msg);
+    note.innerHTML = 'Your brief is ready. If WhatsApp did not open, <a href="' + url + '" target="_blank" rel="noopener">tap here to send it</a> or message +27 64 708 1072.';
+    note.style.color = 'var(--ink-2)';
+    window.open(url, '_blank', 'noopener');
+  });
+})();
+</script>
+
+</body>
+</html>
