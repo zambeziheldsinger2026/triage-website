@@ -6,7 +6,6 @@ services:
     buildCommand: ""
     domains:
       - triagewebstudios.co.za
-      - www.triagewebstudios.co.za
     headers:
       - path: /*
         name: X-Content-Type-Options
