@@ -13,7 +13,9 @@
 <meta name="twitter:card" content="summary">
 <title>Triage Web Studios</title>
 <meta name="description" content="Triage Web Studios designs and develops fast, beautiful websites for ambitious South African businesses. We build your website first. You only pay if you love it.">
-<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
@@ -400,6 +402,98 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
 .consent button { font: 600 14px var(--f-body); color: #fff; background: var(--violet); border: 0; border-radius: 999px; padding: 11px 22px; cursor: pointer; box-shadow: 0 0 24px -4px rgba(124,58,237,.8); }
 .consent button:hover { background: var(--electric); }
 @media (prefers-reduced-motion: reduce) { .consent { transition: none; } }
+/* ---------- detailed mini-site mockups ---------- */
+.ms { container-type: inline-size; }
+.mock-screen.ms::before, .mock-screen.ms::after { display: none; }
+.ms-hero { position: absolute; inset: 0; background: center 40% / cover no-repeat; }
+.ms-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,6,16,.94) 0%, rgba(10,6,16,.8) 45%, rgba(10,6,16,.15) 80%), linear-gradient(0deg, rgba(10,6,16,.85), transparent 45%); }
+.ms-nav { position: absolute; left: 5cqw; right: 5cqw; top: 4.5cqw; display: flex; align-items: center; justify-content: space-between; z-index: 1; font-family: var(--f-body); }
+.ms-nav b { font-size: 3.6cqw; font-weight: 600; letter-spacing: -.02em; color: #fff; } .ms-nav b span, .ph-bar b span { color: #e2925c; }
+.ms-links { display: flex; gap: 3cqw; } .ms-links i { font-style: normal; font-size: 2.3cqw; color: rgba(255,255,255,.75); }
+.ms-btn { display: inline-flex; align-items: center; justify-content: center; font: 600 2.3cqw var(--f-body); padding: 1.6cqw 2.8cqw; border-radius: 1.6cqw; color: #fff; white-space: nowrap; }
+.ms-light { background: #fff; color: #14121a; } .ms-copper { background: #c46a33; box-shadow: 0 1cqw 3cqw rgba(196,106,51,.45); } .ms-wa { background: #22c55e; } .ms-violet { background: var(--violet); box-shadow: 0 1cqw 3cqw rgba(124,58,237,.5); } .ms-dark { background: #14121a; color: #fff; }
+.ms-copy { position: absolute; left: 5cqw; top: 14cqw; width: 52cqw; z-index: 1; display: grid; gap: 1.6cqw; font-family: var(--f-body); }
+.ms-copy small { font: 500 1.8cqw var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: #f0b48a; }
+.ms-copy h4 { margin: 0; font: 700 5.8cqw/1.02 var(--f-body); letter-spacing: -.045em; color: #fff; }
+.ms-copy p { margin: 0; font-size: 2.5cqw; line-height: 1.45; color: rgba(255,255,255,.75); }
+.ms-ctas { display: flex; gap: 1.6cqw; margin-top: 1cqw; }
+.ms-cards { position: absolute; left: 64cqw; right: 5cqw; top: 30cqw; grid-template-columns: 1fr !important; display: grid; grid-template-columns: repeat(3,1fr); gap: 2cqw; z-index: 1; }
+.ms-cards div { background: rgba(255,255,255,.94); border-radius: 2cqw; padding: 2cqw 2.4cqw; display: grid; gap: .4cqw; color: #14121a; box-shadow: 0 2cqw 5cqw rgba(0,0,0,.35); font-family: var(--f-body); }
+.ms-cards em { font-style: normal; font-size: 3cqw; } .ms-cards b { font-size: 2.4cqw; } .ms-cards small { font-size: 1.9cqw; color: #6b6676; }
+/* phone-style screens inside the outcome cards */
+.ph { position: absolute; left: 9%; right: 9%; top: 6%; height: 49%; border-radius: 6cqw; background: #0f0c16; box-shadow: 0 0 0 1.2cqw #1d1926, 0 6cqw 12cqw rgba(0,0,0,.55); overflow: hidden; z-index: 1; font-family: var(--f-body); color: #fff; }
+.ph-bar { display: flex; justify-content: space-between; align-items: center; padding: 4cqw 5cqw 3cqw; }
+.ph-bar b { font-size: 4.4cqw; font-weight: 700; letter-spacing: -.02em; } .ph-bar i { font-style: normal; font-size: 4.4cqw; opacity: .7; }
+.ph-hero { height: 30cqw; background: center/cover no-repeat; position: relative; }
+.ph-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10,6,16,.92) 5%, rgba(10,6,16,.1) 70%); }
+.ph-hero div { position: absolute; left: 5cqw; right: 5cqw; bottom: 3.5cqw; z-index: 1; }
+.ph-hero small, .ph-title small { font: 500 2.4cqw var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: #c4b5fd; }
+.ph-hero h4, .ph-title h4 { margin: 1cqw 0 0; font: 800 6cqw/1.02 var(--f-body); letter-spacing: -.045em; }
+.ph-ctas { display: flex; gap: 2.4cqw; padding: 4cqw 5cqw 5cqw; } .ph-ctas .ms-btn { flex: 1; font-size: 3.4cqw; padding: 3cqw; border-radius: 2.6cqw; }
+.toast { position: absolute; right: 2%; top: 1.5%; z-index: 2; display: flex; gap: 2.6cqw; align-items: center; background: rgba(255,255,255,.96); color: #14121a; border-radius: 3.4cqw; padding: 3cqw 3.6cqw; box-shadow: 0 4cqw 10cqw rgba(0,0,0,.5); font-family: var(--f-body); animation: float 6s ease-in-out infinite; }
+.toast i { font-style: normal; width: 7cqw; height: 7cqw; border-radius: 2cqw; background: #22c55e; color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 3.6cqw; }
+.toast b { display: block; font-size: 3.4cqw; } .toast small { font-size: 2.6cqw; color: #6b6676; }
+.ph-light { background: #faf8f4; color: #14121a; box-shadow: 0 0 0 1.2cqw #e9e4dc, 0 6cqw 12cqw rgba(0,0,0,.55); }
+.ph-light .ph-bar b span { color: #7c3aed; } .ph-light .ph-title small { color: #7c3aed; }
+.ph-title { padding: 0 5cqw 3cqw; }
+.ph-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2cqw; padding: 0 5cqw; } .ph-grid i { aspect-ratio: 1; border-radius: 2.6cqw; background: center/cover no-repeat; }
+.serp { position: absolute; left: 7%; right: 7%; top: 6%; z-index: 1; font-family: var(--f-body); display: grid; gap: 3cqw; }
+.serp-q { display: flex; align-items: center; gap: 2.6cqw; background: #fff; color: #202124; border-radius: 999px; padding: 3.4cqw 4.4cqw; font-size: 3.6cqw; box-shadow: 0 3cqw 8cqw rgba(0,0,0,.4); }
+.serp-q svg { width: 4.4cqw; height: 4.4cqw; fill: none; stroke: #5f6368; stroke-width: 2.4; }
+.serp-top { background: rgba(255,255,255,.97); color: #202124; border-radius: 4cqw; padding: 4.4cqw; box-shadow: 0 0 0 .6cqw rgba(196,181,253,.8), 0 4cqw 12cqw rgba(124,58,237,.55); }
+.serp-top small { font-size: 2.8cqw; color: #4d5156; } .serp-top b { display: block; margin-top: 1.2cqw; font-size: 4.2cqw; line-height: 1.25; color: #1a0dab; font-weight: 600; }
+.serp-top p { margin: 1.6cqw 0 0; font-size: 3cqw; line-height: 1.45; color: #4d5156; }
+.serp-links { display: flex; gap: 2cqw; margin-top: 2.6cqw; flex-wrap: wrap; } .serp-links span { font-size: 2.8cqw; color: #1a0dab; border: .3cqw solid #dadce0; border-radius: 999px; padding: 1.2cqw 2.6cqw; }
+.serp-dim { background: rgba(255,255,255,.1); border-radius: 3.4cqw; padding: 3.6cqw 4.4cqw; display: grid; gap: 1.8cqw; } .serp-dim i { height: 2cqw; border-radius: 1cqw; background: rgba(255,255,255,.28); } .serp-dim i.s { width: 60%; }
+/* whatsapp chat mock */
+.wa { position: absolute; left: 8%; right: 8%; top: 6%; height: 49%; border-radius: 6cqw; overflow: hidden; z-index: 1; font-family: var(--f-body); background: #0b141a; box-shadow: 0 0 0 1.2cqw #1d1926, 0 6cqw 12cqw rgba(0,0,0,.55); display: flex; flex-direction: column; }
+.wa-head { display: flex; align-items: center; gap: 2.6cqw; padding: 2.6cqw 4cqw; background: #1f2c34; color: #e9edef; }
+.wa-av { width: 7cqw; height: 7cqw; border-radius: 50%; background: linear-gradient(135deg,#a78bfa,#7c3aed); display: grid; place-items: center; font-weight: 700; font-size: 3.8cqw; color: #fff; flex: none; }
+.wa-head b { display: block; font-size: 3.6cqw; } .wa-head small { font-size: 2.8cqw; color: #8696a0; }
+.wa-body { flex: 1; padding: 3cqw 3.6cqw; display: flex; flex-direction: column; gap: 2cqw; background: #0b141a radial-gradient(circle at 20% 30%, rgba(255,255,255,.03) 0 1px, transparent 1.5px) 0 0/5cqw 5cqw; }
+.wa-day { align-self: center; font-size: 2.6cqw; color: #8696a0; background: #1f2c34; padding: 1cqw 3cqw; border-radius: 2cqw; }
+.wa-in, .wa-out { max-width: 84%; font-size: 3.3cqw; line-height: 1.3; padding: 2cqw 3cqw 1.3cqw; border-radius: 3cqw; color: #e9edef; }
+.wa-in { align-self: flex-start; background: #202c33; border-top-left-radius: .8cqw; }
+.wa-out { align-self: flex-end; background: #005c4b; border-top-right-radius: .8cqw; }
+.wa-in small, .wa-out small { display: block; text-align: right; font-size: 2.3cqw; color: rgba(233,237,239,.6); margin-top: .6cqw; } .wa-out small { color: #7fd4c4; }
+.wa-typing { align-self: flex-start; display: flex; gap: 1.2cqw; background: #202c33; padding: 2.4cqw 3.2cqw; border-radius: 3cqw; } .wa-typing i { width: 1.6cqw; height: 1.6cqw; border-radius: 50%; background: #8696a0; animation: blink 1.2s infinite; } .wa-typing i:nth-child(2) { animation-delay: .2s; } .wa-typing i:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%, 60%, 100% { opacity: .3; } 30% { opacity: 1; } }
+/* google reviews mock */
+.rv { position: absolute; left: 8%; right: 8%; top: 6%; z-index: 1; font-family: var(--f-body); display: grid; gap: 2.6cqw; }
+.rv-head { display: flex; justify-content: space-between; align-items: center; background: #fff; color: #202124; border-radius: 4cqw; padding: 3.6cqw 4.4cqw; box-shadow: 0 4cqw 10cqw rgba(0,0,0,.45); }
+.rv-head small { font-size: 2.6cqw; color: #5f6368; } .rv-head b { display: block; font-size: 4cqw; margin-top: .4cqw; }
+.rv-score { text-align: right; } .rv-score strong { display: block; font-size: 7cqw; line-height: 1; } .rv-score span, .rv-st { color: #fbbc04; letter-spacing: .3cqw; font-size: 3cqw; }
+.rv-card { background: rgba(255,255,255,.96); color: #202124; border-radius: 3.6cqw; padding: 3.2cqw 4cqw; box-shadow: 0 3cqw 8cqw rgba(0,0,0,.35); }
+.rv-top { display: flex; align-items: center; gap: 2.2cqw; } .rv-top b { font-size: 3.2cqw; flex: 1; }
+.rv-av { width: 6.4cqw; height: 6.4cqw; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 3cqw; }
+.rv-card p { margin: 1.6cqw 0 0; font-size: 3.1cqw; line-height: 1.4; color: #3c4043; }
+@media (prefers-reduced-motion: reduce) { .wa-typing i { animation: none; } }
+/* ---------- why: condensed ---------- */
+.why-one { display: grid; gap: 30px; max-width: 980px; }
+.why-statement { margin: 0; font: 600 clamp(28px, 4vw, 52px)/1.15 var(--f-head); letter-spacing: -.025em; color: var(--ink); text-wrap: balance; }
+.why-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.why-tags li { font: 500 12px var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); padding: 11px 16px; border-radius: 999px; background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px rgba(192,132,252,.28); }
+/* ---------- pricing ---------- */
+.pricing-sub { max-width: 56ch; color: var(--ink-2); font-size: 17px; margin: 18px 0 0; }
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 24px); margin-top: 56px; align-items: stretch; }
+.plan { position: relative; padding: clamp(26px, 3vw, 34px); display: flex; flex-direction: column; gap: 14px; }
+.plan .label::before { display: none; }
+.plan-tag { margin: 0; font: 600 20px/1.25 var(--f-head); color: var(--ink); }
+.plan-price { display: flex; align-items: baseline; gap: 10px; margin-top: 6px; }
+.plan-price strong { font-family: var(--f-display); font-weight: 400; font-size: clamp(52px, 5.4vw, 68px); line-height: 1; }
+.plan-price strong sup { font-size: .38em; vertical-align: .9em; margin-right: 2px; }
+.plan-price em, .plan-month em { font-style: normal; color: var(--ink-3); font-size: 14px; }
+.plan-month strong { font: 600 22px var(--f-head); color: var(--lilac); }
+.plan-lead { margin: 0; color: var(--ink-2); font-size: 15px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.plan .ticks { flex: 1; align-content: start; }
+.plan .ticks svg { stroke: var(--lilac); }
+.plan .btn { margin-top: 10px; width: 100%; }
+.plan.featured { background: linear-gradient(165deg, rgba(124,58,237,.30), rgba(124,58,237,.08) 55%, rgba(255,255,255,.03)); box-shadow: inset 0 0 0 1px rgba(192,132,252,.55), 0 30px 90px -30px rgba(124,58,237,.8); transform: translateY(-10px); }
+.plan.featured:hover { transform: translateY(-14px); }
+.plan-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); font: 500 11px var(--f-mono); letter-spacing: .16em; text-transform: uppercase; color: #fff; background: linear-gradient(120deg, var(--violet), var(--magenta)); padding: 8px 14px; border-radius: 999px; white-space: nowrap; box-shadow: 0 8px 30px -6px rgba(217,70,239,.7); }
+.pricing-note { margin: 40px 0 0; text-align: center; font: 600 clamp(20px, 2.4vw, 26px) var(--f-head); }
+.pricing-note span { color: var(--lilac); }
+@media (max-width: 900px) { .plans { grid-template-columns: 1fr; } .plan.featured { transform: none; order: -1; } .plan.featured:hover { transform: translateY(-4px); } }
 </style>
 </head>
 <body>
@@ -425,7 +519,7 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
       <li><a href="#work">Work</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#process">Process</a></li>
-      <li><a href="#studio">Studio</a></li>
+      <li><a href="#pricing">Pricing</a></li><li><a href="#studio">Studio</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a class="btn btn-primary" href="#contact">Start a project</a>
@@ -454,12 +548,19 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
       <div class="stage reveal" aria-hidden="true">
         <div class="mock glass" data-glow>
           <div class="mock-bar"><i></i><i></i><i></i><b>yourbusiness.co.za</b></div>
-          <div class="mock-screen">
-            <div class="mock-copy">
-              <div class="mk-h">Your brand, online and booking</div>
-              <div class="mk-line"></div>
-              <div class="mk-line" style="width:72%"></div>
-              <div class="mk-pill"></div>
+          <div class="mock-screen ms">
+            <div class="ms-hero" style="background-image:url(assets/demo-plumb.jpg)"></div>
+            <div class="ms-shade"></div>
+            <div class="ms-nav"><b>Kelp <span>&amp;</span> Copper</b><span class="ms-links"><i>Services</i><i>Areas</i><i>Reviews</i></span><span class="ms-btn ms-light">Get a quote</span></div>
+            <div class="ms-copy">
+              <small>24/7 · Southern Suburbs</small>
+              <h4>Burst pipe? We're there in 60 min.</h4>
+              <p>Geysers, leaks and drains, fixed fast with upfront pricing.</p>
+              <div class="ms-ctas"><span class="ms-btn ms-copper">Call now</span><span class="ms-btn ms-wa">WhatsApp us</span></div>
+            </div>
+            <div class="ms-cards">
+              <div><em>🔥</em><b>Geysers</b><small>Same-day installs</small></div>
+              <div><em>💧</em><b>Leak detection</b><small>No broken walls</small></div>
             </div>
           </div>
         </div>
@@ -531,20 +632,39 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
       <div class="work-grid">
         <!-- Outcome cards. Add real client case studies here as projects launch. -->
         <a class="work glass lift reveal" href="#contact" data-glow>
-          <div class="shot"><div class="art art-1"></div>
-            <div class="ui"><div class="t">New clients, every week</div><div class="l"></div><div class="l s"></div><div class="p"></div></div>
+          <div class="shot ms"><div class="art art-1"></div>
+            <div class="wa">
+              <div class="wa-head"><span class="wa-av">J</span><div><b>Jess</b><small>online</small></div></div>
+              <div class="wa-body">
+                                <div class="wa-in">Hi! Would you be available for a job in Clifton? 🙏<small>09:41</small></div>
+                <div class="wa-out">Yes we are! What time suits you?<small>09:42 ✓✓</small></div>
+                <div class="wa-typing"><i></i><i></i><i></i></div>
+              </div>
+            </div>
             <div class="caption glass"><div class="meta"><span>Outcome</span><span>01</span></div><h3>New paying clients</h3><div class="goal">Clear calls to action, click to WhatsApp and enquiry forms that turn visitors into paying customers.</div><span class="more">Start getting clients →</span></div>
           </div>
         </a>
         <a class="work glass lift reveal" href="#contact" data-glow>
-          <div class="shot"><div class="art art-2"></div>
-            <div class="ui"><div class="t">Trusted from the first click</div><div class="l"></div><div class="l s"></div><div class="p"></div></div>
+          <div class="shot ms"><div class="art art-2"></div>
+            <div class="rv">
+              <div class="rv-head"><div><small>Google reviews</small><b>Fresh Coat Painters</b></div><div class="rv-score"><strong>4.9</strong><span>★★★★★</span></div></div>
+              <div class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#7c3aed">S</span><b>Sarah M.</b><span class="rv-st">★★★★★</span></div><p>Neat, on time and the house looks brand new.</p></div>
+              <div class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#0ea5e9">L</span><b>Lwazi N.</b><span class="rv-st">★★★★★</span></div><p>Clear quote, no surprises. Would hire again.</p></div>
+            </div>
             <div class="caption glass"><div class="meta"><span>Outcome</span><span>02</span></div><h3>More trust</h3><div class="goal">A professional, modern website makes customers trust you before they even pick up the phone.</div><span class="more">Look the part →</span></div>
           </div>
         </a>
         <a class="work glass lift reveal" href="#contact" data-glow>
-          <div class="shot"><div class="art art-3"></div>
-            <div class="ui"><div class="t">Found on Google</div><div class="l"></div><div class="l s"></div><div class="p"></div></div>
+          <div class="shot ms"><div class="art art-3"></div>
+            <div class="serp">
+              <div class="serp-q"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>painter near me cape town</div>
+              <div class="serp-top">
+                <small>freshcoatpainters.co.za</small>
+                <b>Fresh Coat Painters | Interior &amp; Exterior Painting, Cape Town</b>
+                <p>Free quotes, neat work and clear pricing. See our recent projects and book online.</p>
+                <div class="serp-links"><span>Services</span><span>Our work</span><span>Free quote</span></div>
+              </div>
+            </div>
             <div class="caption glass"><div class="meta"><span>Outcome</span><span>03</span></div><h3>Easy to discover</h3><div class="goal">SEO built in, so the people searching for what you offer find your business, not your competitors.</div><span class="more">Get found →</span></div>
           </div>
         </a>
@@ -568,59 +688,54 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
   </section>
 
   <!-- ============ STUDIO / WHY TRIAGE ============ -->
+  <!-- ============ PRICING ============ -->
+  <section id="pricing">
+    <div class="wrap">
+      <span class="label reveal">Pricing</span>
+      <h2 class="display h2 reveal">Pick your plan. <span class="glow-text">Scale smart.</span></h2>
+      <p class="pricing-sub reveal">Simple packages, clear prices. Every plan includes your domain, hosting, maintenance and design changes.</p>
+      <div class="plans">
+        <article class="plan glass lift reveal " data-glow>
+          <span class="label">Starter</span>
+          <p class="plan-tag">Get online, properly.</p>
+          <div class="plan-price"><strong><sup>R</sup>2 000</strong><em>once off</em></div>
+          <div class="plan-month"><strong>+ R350</strong><em>/month</em></div>
+          <p class="plan-lead">Everything a small business needs to look professional and get enquiries.</p>
+          <ul class="ticks"><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Custom, mobile-first website</li><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Domain and hosting included</li><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Ongoing website maintenance</li><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Design changes when you need them</li><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>WhatsApp and enquiry buttons on every page</li></ul>
+          <a class="btn btn-ghost" href="#contact">Choose Starter</a>
+        </article>
+        <article class="plan glass lift reveal featured" data-glow><span class="plan-badge">Most popular</span>
+          <span class="label">Express</span>
+          <p class="plan-tag">Live in 3 days. Built to grow.</p>
+          <div class="plan-price"><strong><sup>R</sup>4 000</strong><em>once off</em></div>
+          <div class="plan-month"><strong>+ R500</strong><em>/month</em></div>
+          <p class="plan-lead">Everything in Starter, set up fast and improved every month.</p>
+          <ul class="ticks"><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Everything in Starter</li><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Your site set up in 3 days</li><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Monthly website traffic report</li><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Monthly improvements to bring in more visitors</li></ul>
+          <a class="btn btn-primary" href="#contact">Choose Express</a>
+        </article>
+        <article class="plan glass lift reveal " data-glow>
+          <span class="label">Premium</span>
+          <p class="plan-tag">Your full online growth team.</p>
+          <div class="plan-price"><strong><sup>R</sup>8 000</strong><em>once off</em></div>
+          <div class="plan-month"><strong>+ R2 500</strong><em>/month</em></div>
+          <p class="plan-lead">Everything in Express, plus content and SEO every single week.</p>
+          <ul class="ticks"><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Everything in Express</li><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Weekly content for your social media</li><li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Ongoing SEO boosts to climb on Google</li></ul>
+          <a class="btn btn-ghost" href="#contact">Choose Premium</a>
+        </article>
+      </div>
+      <p class="pricing-note reveal">We build it first. <span>You only pay if you love it.</span></p>
+    </div>
+  </section>
+
   <section id="studio">
     <div class="wrap">
       <span class="label reveal">Why Triage</span>
       <h2 class="display h2 reveal">Zero risk. <span class="glow-text">All craft.</span></h2>
-      <div class="studio-grid">
-        <div class="offer glass reveal" data-glow>
-          <span class="label">The launch offer</span>
-          <div class="price">
-            <div><small>Your website</small><strong><sup>R</sup>2 000</strong><p>Once off, only when you are happy with it.</p></div>
-            <div><small>Care plan</small><strong><sup>R</sup>350<em>/month</em></strong><p>Domain, hosting and updates handled.</p></div>
-          </div>
-          <ul class="ticks">
-            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>We build your site first, before you pay a cent.</li>
-            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Not happy with it? You owe us nothing.</li>
-            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Mobile first, fast and ready for Google.</li>
-            <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>WhatsApp and enquiry buttons on every page.</li>
-          </ul>
-          <a class="btn btn-primary" href="#contact">Get my free sample</a>
+      <div class="studio-grid" style="grid-template-columns:1fr">
+        <div class="why-one reveal">
+          <p class="why-statement">We help your business <span class="glow-text">grow and get discovered</span> in every corner of your online presence.</p>
+          <ul class="why-tags"><li>Hands-on studio</li><li>Fast on any phone</li><li>Built to convert</li><li>Straight talk</li><li>Cape Town craft</li></ul>
         </div>
-        <div class="why-list">
-          <article class="why glass lift reveal" data-glow><h3>Hands on studio</h3><p>You deal directly with the person designing and building your site.</p></article>
-          <article class="why glass lift reveal" data-glow><h3>Performance first</h3><p>Every page is built light, so it opens fast on any phone and any network.</p></article>
-          <article class="why glass lift reveal" data-glow><h3>Built to convert</h3><p>Clear calls to action, click to WhatsApp and enquiry forms where they matter.</p></article>
-          <article class="why glass lift reveal" data-glow><h3>Room to grow</h3><p>Start with a site, add bookings, a store or automation when you need them.</p></article>
-          <article class="why glass lift reveal" data-glow><h3>Straight talk</h3><p>Clear prices, no jargon and a real person on WhatsApp when you need help.</p></article>
-          <article class="why glass lift reveal" data-glow><h3>Cape Town craft</h3><p>Local understanding of South African customers, built to global standards.</p></article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PROMISE (owner's note) ============ -->
-  <!-- Replace these with genuine client testimonials (with permission) once projects launch. -->
-  <section id="promise">
-    <div class="wrap">
-      <span class="label reveal">Our promise</span>
-      <h2 class="display h2 reveal">Straight from <span class="glow-text">the studio.</span></h2>
-      <div class="promise">
-        <figure class="quote glass lift reveal" data-glow style="margin:0">
-          <div class="qm" aria-hidden="true">“</div>
-          <p>You see your finished website before you pay anything. If it is not right for you, you walk away and owe nothing.</p>
-          <footer><img src="assets/triage-mark.png" alt=""><span>Owner</span></footer>
-        </figure>
-        <figure class="quote glass lift reveal" data-glow style="margin:0">
-          <div class="qm" aria-hidden="true">“</div>
-          <p>Your site is built for the way South Africans actually find businesses: on a phone, on Google, then straight to WhatsApp.</p>
-          <footer><img src="assets/triage-mark.png" alt=""><span>Owner</span></footer>
-        </figure>
-        <figure class="quote glass lift reveal" data-glow style="margin:0">
-          <div class="qm" aria-hidden="true">“</div>
-          <p>After launch you are not on your own. The care plan keeps your domain, hosting and updates handled every month.</p>
-          <footer><img src="assets/triage-mark.png" alt=""><span>Owner</span></footer>
-        </figure>
       </div>
     </div>
   </section>
