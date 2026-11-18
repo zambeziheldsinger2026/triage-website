@@ -500,10 +500,109 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
   .consent p { margin: 0; font-size: 12px; line-height: 1.4; flex: 1; }
   .consent button { padding: 9px 14px; font-size: 13px; flex: none; }
 }
+
+/* ===== black water wall behind everything + glass panels that refract it (WebGL) ===== */
+.sky { background: #000; }
+.wall, .blob, .liquid, .gloss { display: none; }
+.grain { opacity: .04; }
+#water { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.6s ease; }
+.gl-on #water { opacity: 1; }
+.gl-on .glass { -webkit-backdrop-filter: none; backdrop-filter: none; background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(20,10,36,.35) 40%, rgba(10,5,20,.45)); }
+.no-gl .glass { background: rgba(14, 9, 24, .86); }
+/* nav: marketing services button */
+#menu a.nav-mkt { white-space: nowrap; padding: 7px 14px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--magenta); color: #fff; transition: background .25s, box-shadow .25s; }
+#menu a.nav-mkt:hover { background: rgba(217,70,239,.14); box-shadow: inset 0 0 0 1px var(--magenta), 0 0 18px -4px rgba(217,70,239,.7); }
+#menu a.nav-mkt[aria-current="page"] { background: rgba(217,70,239,.18); }
+@media (max-width: 1180px) and (min-width: 861px) { .nav ul { gap: 14px; } #menu a { font-size: 13.5px; white-space: nowrap; } .nav .btn-primary { padding: 0 16px; font-size: 14px; } }
+/* ===================== marketing services page ===================== */
+.mk-zone { position: relative; z-index: 1; isolation: isolate; clip-path: inset(0); padding-bottom: 40px; }
+.mk-zone::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #e9e9e9 url(assets/marketing-bg.jpg) 22% 50% / cover no-repeat; }
+.mk-hero { min-height: 100svh; display: grid; align-items: center; padding-block: 40px 80px; }
+.mk-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.mk-hero-copy { grid-column: 2; color: #0a0a0c; }
+.mk-hero .label { color: var(--violet); }
+.mk-hero .mk-title { font-size: clamp(52px, 7vw, 108px); margin-top: 18px; color: #0a0a0c; }
+.mk-hero .glow-text { color: var(--violet); text-shadow: none; }
+.mk-hero .pink-mist::before { background: radial-gradient(closest-side, rgba(217,70,239,.5), rgba(217,70,239,.18) 55%, transparent); mix-blend-mode: multiply; }
+.mk-hero .lede { color: #22242a; max-width: 520px; text-shadow: 0 0 8px #e6e6e6, 0 0 16px #e6e6e6, 0 0 2px #e6e6e6; }
+.mk-hero .btn-ghost { color: #0a0a0c; background: rgba(255,255,255,.5); box-shadow: inset 0 0 0 1px rgba(10,10,12,.35); }
+.mk-hero .btn-ghost:hover { box-shadow: inset 0 0 0 1px var(--magenta); }
+.mk-sheet { position: relative; z-index: 1; padding-block: 0; scroll-margin-top: 70px; }
+.mk-sheet > .wrap { background: rgba(3,4,7,.92); border: 1px solid rgba(255,255,255,.08); border-radius: 36px; padding: clamp(28px, 5vw, 64px); margin-block: 28px; box-shadow: 0 40px 120px -40px rgba(0,0,0,.8); }
+.mk-sheet .h2 { margin: 16px 0 36px; }
+.mk-lists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.mk-list, .mk-pack, .mk-cta { position: relative; padding: clamp(22px, 3vw, 34px); }
+.mk-num { font: 500 12px var(--f-mono); letter-spacing: .2em; color: var(--lilac); }
+.mk-list h3, .mk-pack h3 { font-family: var(--f-head); font-weight: 600; font-size: 21px; margin: 8px 0 18px; }
+.mk-list ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.mk-list li { display: flex; align-items: baseline; gap: 10px; padding: 13px 0; border-top: 1px solid rgba(255,255,255,.07); font-size: 15px; color: var(--ink-2); }
+.mk-list li i { flex: 1; border-bottom: 1px dotted rgba(255,255,255,.18); transform: translateY(-4px); min-width: 16px; }
+.mk-list li b { font-family: var(--f-head); font-weight: 600; color: #fff; white-space: nowrap; }
+.mk-list li b small { font-weight: 400; color: var(--ink-3); font-size: 12px; }
+.mk-terms li { display: block; color: var(--ink-2); font-size: 14.5px; padding-left: 18px; position: relative; }
+.mk-terms li::before { content: ""; position: absolute; left: 0; top: 21px; width: 6px; height: 6px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 8px var(--violet); }
+.mk-packs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.mk-pack { display: flex; flex-direction: column; }
+.mk-pack h3 { margin-bottom: 10px; }
+.mk-price { display: flex; align-items: baseline; gap: 8px; }
+.mk-price b { font-family: var(--f-display); font-weight: 400; font-size: 54px; line-height: 1; color: #fff; }
+.mk-price span { color: var(--ink-3); font-size: 14px; }
+.mk-pack p { color: var(--ink-2); font-size: 15px; margin: 12px 0 14px; }
+.mk-pack ul { list-style: none; padding: 16px 0 0; margin: 0 0 22px; border-top: 1px solid rgba(255,255,255,.08); display: grid; gap: 9px; font-size: 14.5px; color: var(--ink-2); }
+.mk-pack li { display: flex; gap: 10px; align-items: flex-start; }
+.mk-pack li svg { width: 18px; height: 18px; flex: none; color: var(--lilac); margin-top: 2px; }
+.mk-pack .btn { margin-top: auto; width: 100%; }
+.mk-cta { text-align: center; display: grid; justify-items: center; gap: 18px; }
+.mk-cta .h2 { margin: 6px 0 8px; max-width: 900px; }
+.mk-end > .wrap { margin-bottom: 40px; }
+.mk-zone .glass { background: rgba(14,9,24,.92); -webkit-backdrop-filter: none; backdrop-filter: none; }
+@media (max-width: 900px) {
+  .mk-lists, .mk-packs { grid-template-columns: 1fr; }
+}
+@media (max-width: 860px) {
+  .mk-zone::before { background-size: auto 58svh; background-position: 16% 0; background-color: #e4e4e4; }
+  .mk-zone::after { content: ""; position: fixed; left: 0; right: 0; top: calc(58svh - 110px); height: 112px; z-index: -1; pointer-events: none; background: linear-gradient(transparent, #e4e4e4); }
+  .mk-hero { min-height: auto; align-items: start; padding: calc(58svh - 76px) 0 36px; }
+  .mk-hero-grid { grid-template-columns: 1fr; }
+  .mk-hero-copy { grid-column: 1; }
+  .mk-hero .mk-title { font-size: clamp(46px, 13vw, 64px); }
+  .mk-sheet > .wrap { border-radius: 26px; margin-inline: 10px; }
+}
+
+.hero h1, .mk-hero .mk-title { isolation: isolate; }
+.pink-mist { position: relative; display: inline-block; }
+.pink-mist::before { content: ""; position: absolute; z-index: -1; left: -22%; right: -30%; top: -38%; bottom: -55%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(217,70,239,.5), rgba(217,70,239,.18) 55%, transparent); filter: blur(34px); mix-blend-mode: multiply; }
+.mk-hero .glow-text { background: none; -webkit-text-fill-color: currentColor; color: var(--violet); }
+.mk-sheet .glow-text { filter: none; }
+.mk-list li b, .mk-price b { color: #fff; }
+.gl-on .nav.glass { background: rgba(10, 6, 18, .78); }
+
+/* hot email button (marketing section) */
+@property --hot { syntax: "<number>"; inherits: false; initial-value: 0; }
+.btn-hot { position: relative; color: #fff; min-height: 58px; padding: 0 34px; font-size: 17px; background: linear-gradient(120deg, var(--magenta), var(--violet) 55%, var(--electric)); background-size: 200% 100%;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.22) inset, 0 0 calc(24px + var(--hot) * 30px) rgba(217,70,239,calc(.55 + var(--hot) * .35)), 0 18px 50px -14px rgba(124,58,237,.9);
+  animation: shimmer 6s linear infinite, hotpulse 2.4s ease-in-out infinite; }
+.btn-hot:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 0 1px rgba(255,255,255,.35) inset, 0 0 60px rgba(217,70,239,.95), 0 22px 60px -12px rgba(124,58,237,1); }
+.btn-hot svg { width: 20px; height: 20px; }
+@keyframes hotpulse { 50% { --hot: 1; } }
+.mk-mail { color: var(--ink-2); font: 500 14px var(--f-mono); letter-spacing: .04em; text-decoration: none; }
+.mk-mail:hover { color: #fff; }
+@media (prefers-reduced-motion: reduce) { .btn-hot { animation: none; } }
+
+/* mobile polish */
+.hero .lede, .hero .trust { text-shadow: 0 0 10px #000, 0 0 22px #000, 0 0 2px #000; }
+.nav-shell::before { content: ""; position: absolute; top: 0; left: 50%; width: 100vw; transform: translateX(-50%); height: 40px; pointer-events: none; z-index: -1;
+  background: linear-gradient(#000 45%, rgba(0,0,0,0)); }
+@media (max-width: 600px) {
+  .hero .label { font-size: 11px; }
+  .hero .lede { font-size: 16px; }
+}
 </style>
 </head>
 <body>
 <div class="sky" aria-hidden="true">
+  <canvas id="water"></canvas>
   <div class="wall"></div>
   <div class="blob b1" data-depth="0.08"></div>
   <div class="blob b2" data-depth="-0.06"></div>
@@ -525,6 +624,7 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
       <li><a href="#work">Work</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#process">Process</a></li>
+      <li><a class="nav-mkt" href="#marketing">Marketing services</a></li>
       <li><a href="#pricing">Pricing</a></li><li><a href="#studio">Studio</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -679,20 +779,6 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
     </div>
   </section>
 
-  <!-- ============ PROCESS ============ -->
-  <section id="process">
-    <div class="wrap">
-      <span class="label reveal">The Triage Method</span>
-      <h2 class="display h2 reveal">Four steps from idea <span class="glow-text">to launch.</span></h2>
-      <div class="steps">
-        <article class="step glass lift reveal" data-glow><div class="num glass">01</div><h3>Diagnose</h3><p>We learn your business, your customers and what is holding your online presence back.</p></article>
-        <article class="step glass lift reveal" data-glow><div class="num glass">02</div><h3>Prioritise</h3><p>We agree the pages and features that will bring in the most work, first.</p></article>
-        <article class="step glass lift reveal" data-glow><div class="num glass">03</div><h3>Build</h3><p>We design and build your site, and you see the real thing before you pay anything.</p></article>
-        <article class="step glass lift reveal" data-glow><div class="num glass">04</div><h3>Scale</h3><p>We launch, measure what works and keep improving it on your care plan.</p></article>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ STUDIO / WHY TRIAGE ============ -->
   <!-- ============ PRICING ============ -->
   <section id="pricing">
@@ -730,6 +816,20 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
         </article>
       </div>
       <p class="pricing-note reveal">We build it first. <span>You only pay if you love it.</span></p>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section id="process">
+    <div class="wrap">
+      <span class="label reveal">The Triage Method</span>
+      <h2 class="display h2 reveal">Four steps from idea <span class="glow-text">to launch.</span></h2>
+      <div class="steps">
+        <article class="step glass lift reveal" data-glow><div class="num glass">01</div><h3>Diagnose</h3><p>We learn your business, your customers and what is holding your online presence back.</p></article>
+        <article class="step glass lift reveal" data-glow><div class="num glass">02</div><h3>Prioritise</h3><p>We agree the pages and features that will bring in the most work, first.</p></article>
+        <article class="step glass lift reveal" data-glow><div class="num glass">03</div><h3>Build</h3><p>We design and build your site, and you see the real thing before you pay anything.</p></article>
+        <article class="step glass lift reveal" data-glow><div class="num glass">04</div><h3>Scale</h3><p>We launch, measure what works and keep improving it on your care plan.</p></article>
+      </div>
     </div>
   </section>
 
@@ -780,6 +880,143 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
       </div>
     </div>
   </section>
+
+  <!-- ============ MARKETING SERVICES ============ -->
+  <div id="marketing" class="mk-zone">
+  <!-- ============ MARKETING HERO ============ -->
+  <section class="mk-hero">
+    <div class="wrap mk-hero-grid">
+      <div class="mk-hero-copy reveal">
+        <span class="label">Marketing services</span>
+        <h2 class="display mk-title">Design that <span class="glow-text">sparks</span> <span class="pink-mist">growth.</span></h2>
+        <p class="lede">Scroll-stopping social media, print that people keep, and branding that makes your business look as good as it is. Clear prices, no surprises.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#prices">See the price list
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+          <a class="btn btn-ghost" href="https://wa.me/27647081072?text=Hi%20Triage%20Web%20Studios%2C%20I%27d%20like%20to%20chat%20about%20your%20marketing%20services." target="_blank" rel="noopener">Message us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICE LISTS ============ -->
+  <section id="prices" class="mk-sheet">
+    <div class="wrap">
+      <span class="label reveal">Price list</span>
+      <h2 class="display h2 reveal">Every design, <span class="glow-text">one clear price.</span></h2>
+      <div class="mk-lists">
+        <article class="mk-list glass reveal" data-glow>
+          <span class="mk-num">01</span>
+          <h3>Social media &amp; advertising design</h3>
+          <ul>
+          <li><span>Single social media post / poster</span><i></i><b>R550</b></li>
+          <li><span>Pack of 10 social media posts</span><i></i><b>R3 500</b></li>
+          <li><span>Carousel (5–6 slides)</span><i></i><b>R950</b></li>
+          <li><span>WhatsApp status / advertisement</span><i></i><b>R400</b></li>
+          <li><span>Instagram highlight covers (set of 5)</span><i></i><b>R550</b></li>
+          <li><span>Monthly social media package (12 posts)</span><i></i><b>R4 500</b></li>
+          </ul>
+        </article>
+        <article class="mk-list glass reveal" data-glow>
+          <span class="mk-num">02</span>
+          <h3>Print &amp; business stationery</h3>
+          <ul>
+          <li><span>Flyer design</span><i></i><b>R750</b></li>
+          <li><span>Business card design</span><i></i><b>R850</b></li>
+          <li><span>Letterhead design</span><i></i><b>R750</b></li>
+          <li><span>Email signature design</span><i></i><b>R650</b></li>
+          <li><span>Menu / price list design</span><i></i><b>R1 200</b></li>
+          <li><span>Brochure / catalogue design</span><i></i><b>R850 <small>per page</small></b></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="packages" class="mk-sheet">
+    <div class="wrap">
+      <span class="label reveal">03 · Premium design packages</span>
+      <h2 class="display h2 reveal">Bundled for <span class="glow-text">better value.</span></h2>
+      <div class="mk-packs">
+        <article class="mk-pack glass lift reveal" data-glow>
+          <span class="label">Package</span>
+          <h3>Business Launch Package</h3>
+          <div class="mk-price"><b>R3 500</b><span>once off</span></div>
+          <p>Everything a new business needs to look professional from day one.</p>
+          <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Business card design</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Letterhead design</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Email signature</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>2 promotional flyers</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>5 social media posts</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>5 Instagram highlight covers</li></ul>
+          <a class="btn btn-primary" href="https://wa.me/27647081072?text=Hi%20Triage%20Web%20Studios%2C%20I%27m%20interested%20in%20the%20Business%20Launch%20Package%20%28R3%20500%29." target="_blank" rel="noopener">Get this package</a>
+        </article>
+        <article class="mk-pack glass lift reveal" data-glow>
+          <span class="label">Monthly</span>
+          <h3>Social Media Creative Package</h3>
+          <div class="mk-price"><b>R5 500</b><span>per month</span></div>
+          <p>A full month of on-brand content, planned and designed for you.</p>
+          <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>12 branded social media designs</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>4 promotional WhatsApp graphics</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>2 carousel designs</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Monthly content planning</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Two rounds of revisions per design</li></ul>
+          <a class="btn btn-primary" href="https://wa.me/27647081072?text=Hi%20Triage%20Web%20Studios%2C%20I%27m%20interested%20in%20the%20Social%20Media%20Creative%20Package%20%28R5%20500%29." target="_blank" rel="noopener">Get this package</a>
+        </article>
+        <article class="mk-pack glass lift reveal" data-glow>
+          <span class="label">Package</span>
+          <h3>Complete Business Branding Package</h3>
+          <div class="mk-price"><b>R6 500</b><span>once off</span></div>
+          <p>A complete identity: logo, colours, type and the guidelines to use them.</p>
+          <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Logo design</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Business card design</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Letterhead design</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Email signature</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Brand colour palette</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Typography selection</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Basic brand guidelines</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>3 promotional social media designs</li></ul>
+          <a class="btn btn-primary" href="https://wa.me/27647081072?text=Hi%20Triage%20Web%20Studios%2C%20I%27m%20interested%20in%20the%20Complete%20Business%20Branding%20Package%20%28R6%20500%29." target="_blank" rel="noopener">Get this package</a>
+        </article>
+        <article class="mk-pack glass lift reveal" data-glow>
+          <span class="label">Package</span>
+          <h3>Promotional Campaign Package</h3>
+          <div class="mk-price"><b>R4 500</b><span>per campaign</span></div>
+          <p>A focused burst of creative for a launch, sale or special.</p>
+          <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>5 promotional social media designs</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>2 carousel designs</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>2 WhatsApp advertisements</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>1 promotional flyer</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Campaign creative direction</li></ul>
+          <a class="btn btn-primary" href="https://wa.me/27647081072?text=Hi%20Triage%20Web%20Studios%2C%20I%27m%20interested%20in%20the%20Promotional%20Campaign%20Package%20%28R4%20500%29." target="_blank" rel="noopener">Get this package</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="extras" class="mk-sheet">
+    <div class="wrap mk-lists">
+      <article class="mk-list glass reveal" data-glow>
+        <span class="mk-num">04</span>
+        <h3>Additional services &amp; fees</h3>
+        <ul>
+          <li><span>Urgent 24-hour delivery</span><i></i><b>+30%</b></li>
+          <li><span>Additional revision round</span><i></i><b>R250</b></li>
+          <li><span>Editable source files</span><i></i><b>R350</b></li>
+          <li><span>Additional design format</span><i></i><b>R150</b></li>
+          <li><span>Copywriting</span><i></i><b>R250–R500</b></li>
+          <li><span>Additional social media post</span><i></i><b>R350</b></li>
+        </ul>
+      </article>
+      <article class="mk-list mk-policy glass reveal" data-glow>
+        <span class="mk-num">05</span>
+        <h3>How we price</h3>
+        <ul class="mk-terms">
+          <li>Prices are quoted in South African Rand (ZAR).</li>
+          <li>A deposit may be required before work starts.</li>
+          <li>Projects include the specified number of revisions; extra rounds are charged separately.</li>
+          <li>Urgent delivery is subject to availability.</li>
+          <li>Printing, advertising spend and third-party production costs are excluded unless quoted.</li>
+          <li>Final designs are supplied in agreed formats; editable source files are charged separately.</li>
+          <li>Larger projects and bespoke requirements are quoted individually.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="mk-sheet mk-end">
+    <div class="wrap">
+      <div class="mk-cta glass reveal">
+        <span class="label">Triage Web Studios</span>
+        <h2 class="display h2">Professional design. Strategic branding. <span class="glow-text">Business growth.</span></h2>
+        <a class="btn btn-hot" href="mailto:triagewebstudios@gmail.com?subject=Marketing%20services%20enquiry&amp;body=Hi%20Triage%20Web%20Studios%2C%0A%0AI%27d%20like%20a%20quote%20for%3A%20">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>
+          Email us</a>
+        <a class="mk-mail" href="mailto:triagewebstudios@gmail.com">triagewebstudios@gmail.com</a>
+      </div>
+    </div>
+  </section>
+  </div>
 </main>
 
 <!-- ============ FOOTER ============ -->
@@ -864,7 +1101,7 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
 
   // Brief form -> WhatsApp message (no server needed)
   var form = document.getElementById('brief'), note = document.getElementById('formNote');
-  form.addEventListener('submit', function (e) {
+  if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = form.name.value.trim(), biz = form.business.value.trim();
     if (!name || !biz) { note.textContent = 'Please add your name and business name so we know who you are.'; note.style.color = 'var(--lilac)'; (name ? form.business : form.name).focus(); return; }
@@ -886,7 +1123,11 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
 (function () {
   var box = document.getElementById('consent'), k = 'triage-legal-ok', seen = false;
   try { seen = localStorage.getItem(k) === '1'; } catch (e) {}
-  if (!seen) setTimeout(function () { box.classList.add('show'); }, 1200);
+  if (!seen) {                                   /* wait until the visitor starts scrolling (or 6s) so the first screen stays clean */
+    var shown = false, show = function () { if (shown) return; shown = true; box.classList.add('show'); removeEventListener('scroll', onS); };
+    var onS = function () { if (scrollY > 160) show(); };
+    addEventListener('scroll', onS, { passive: true }); setTimeout(show, 6000);
+  }
   document.getElementById('consentOk').addEventListener('click', function () {
     box.classList.remove('show');
     try { localStorage.setItem(k, '1'); } catch (e) {}
@@ -894,5 +1135,96 @@ footer.site { position: relative; z-index: 1; padding-block: 64px calc(40px + en
 })();
 </script>
 
+<script>
+/* Pitch-black water, steady swell and a moonlit glitter path.
+   Every .glass panel is passed to the shader as a rounded rectangle: inside it the water is refracted
+   through a curved glass edge (strong bend at the rim, slight magnification in the middle) with a specular rim. */
+(function () {
+  var c = document.getElementById('water'); if (!c) return;
+  var gl = c.getContext('webgl', { alpha: false, antialias: false, powerPreference: 'low-power' });
+  if (!gl) { document.documentElement.classList.add('no-gl'); return; }
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, MAXG = 16;
+  var fs = [
+    'precision highp float;',
+    'uniform vec2 R; uniform float T; uniform float S; uniform float K;',
+    'uniform vec4 G[16]; uniform float GR[16]; uniform float NG;',
+    'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+    'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
+    'float H(vec2 p,float t){float v=0.,a=.14,f=1.6,w=.7;',
+    ' for(int i=0;i<9;i++){ float an=float(i)*2.399+.3; vec2 d=vec2(cos(an),sin(an));',   /* golden-angle directions: no repeating grid */
+    '  float ph=dot(d,p)*f+t*w+float(i)*1.7; v+=a*(sin(ph)+.35*sin(2.*ph+1.));',             /* slightly peaked crests */
+    '  a*=.72; f*=1.32; w*=1.12; }',
+    ' return v;}',
+    'vec3 water(vec2 fc){',
+    ' vec2 sp=(fc-.5*R)/R.y;',
+    ' vec2 p=sp*vec2(6.,6.)+vec2(0.,T*.04+S*8.);',                      /* surface faces the viewer like a wall */
+    ' float e=.003; float h0=H(p,T); vec2 g=vec2(H(p+vec2(e,0.),T)-h0,H(p+vec2(0.,e),T)-h0)/e;',
+    ' vec3 N=normalize(vec3(-g.x*.5,1.,-g.y*.5));',
+    ' vec3 I=normalize(vec3(sp.x*.35,-1.,sp.y*.35));',                       /* gentle lens, no vanishing point */
+    ' vec3 Rf=reflect(I,N);',
+    ' float k1=max(dot(Rf,normalize(vec3(.10,1.,.16))),0.), k2=max(dot(Rf,normalize(vec3(-.30,1.,-.22))),0.);',
+    ' float glit=pow(k1,500.)*1.6+pow(k1,80.)*.22+pow(k1,12.)*.03+pow(k2,350.)*.5+pow(k2,50.)*.05;',
+    ' float fres=.02+.98*pow(1.-max(dot(N,-I),0.),5.);',
+    ' float band=smoothstep(.9,.0,abs(sp.y-.18+sp.x*.35));',                /* a soft diagonal light band across the wall */
+    ' vec3 col=vec3(.01+.02*fres)+vec3(glit)*(.22+.42*band);',
+    ' return col*vec3(.86,.92,1.);}',
+    'float box(vec2 p,vec2 c,vec2 b,float r){vec2 q=abs(p-c)-b+r;return length(max(q,0.))+min(max(q.x,q.y),0.)-r;}',
+    'void main(){',
+    ' vec2 fc=gl_FragCoord.xy; vec2 at=fc; float rim=0., edge=0., top=0., ins=0.;',
+    ' for(int i=0;i<16;i++){ if(float(i)>=NG) break;',
+    '  vec4 g=G[i]; vec2 c=(g.xy+g.zw)*.5, b=(g.zw-g.xy)*.5; float r=min(GR[i],min(b.x,b.y));',
+    '  float sd=box(fc,c,b,r);',
+    '  if(sd<0.){',
+    '   vec2 nn=normalize(vec2(box(fc+vec2(1,0),c,b,r)-box(fc-vec2(1,0),c,b,r),box(fc+vec2(0,1),c,b,r)-box(fc-vec2(0,1),c,b,r))+1e-5);',
+    '   float bw=min(34.*K,min(b.x,b.y)*.6); float t=clamp(1.+sd/bw,0.,1.);',          /* 1 at the rim, 0 past the bevel */
+    '   float bend=t*t*t;',
+    '   at=fc+nn*bend*bw*1.1-(fc-c)*.06;',                                              /* curved edge pulls the image, centre magnifies slightly */
+    '   rim=bend; edge=smoothstep(1.6*K,0.,-sd); top=max(nn.y,0.); ins=1.; break; }',
+    ' }',
+    ' vec3 col=water(at)*mix(1.,mix(.22,1.,rim),ins);',
+    ' col+=vec3(.9,.95,1.)*(rim*rim*.07+edge*(.10+.22*top));',                          /* specular along the curved rim, brighter on top */
+    ' col=col/(1.+col); gl_FragColor=vec4(col,1.);}'
+  ].join('\n');
+  function sh(t, src) { var o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(o)); return null; } return o; }
+  var v = sh(gl.VERTEX_SHADER, 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}'), f = sh(gl.FRAGMENT_SHADER, fs);
+  if (!v || !f) { document.documentElement.classList.add('no-gl'); return; }
+  var pr = gl.createProgram(); gl.attachShader(pr, v); gl.attachShader(pr, f); gl.linkProgram(pr);
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { document.documentElement.classList.add('no-gl'); return; }
+  gl.useProgram(pr);
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var a = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
+  var U = {}; ['R', 'T', 'S', 'K', 'NG'].forEach(function (k) { U[k] = gl.getUniformLocation(pr, k); });
+  var uG = gl.getUniformLocation(pr, 'G'), uGR = gl.getUniformLocation(pr, 'GR');
+  var scale = Math.min(window.devicePixelRatio || 1, 2) * (innerWidth < 760 ? .85 : 1), sx = 1;
+  function size() { c.width = Math.max(2, Math.round(innerWidth * scale)); c.height = Math.max(2, Math.round(innerHeight * scale)); sx = c.width / innerWidth;
+    gl.viewport(0, 0, c.width, c.height); gl.uniform2f(U.R, c.width, c.height); gl.uniform1f(U.K, sx); }
+  size(); addEventListener('resize', size);
+  var panels = [].slice.call(document.querySelectorAll('.glass')).filter(function (el) { return !el.closest('.mk-zone'); }), radii = panels.map(function (el) { return parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0; });
+  var Gd = new Float32Array(MAXG * 4), GRd = new Float32Array(MAXG);
+  function rects() {
+    var k = 0, H = innerHeight;
+    for (var i = 0; i < panels.length && k < MAXG; i++) {
+      var el = panels[i], r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > H || r.width < 4 || getComputedStyle(el).visibility === 'hidden') continue;
+      Gd[k * 4] = r.left * sx; Gd[k * 4 + 1] = (H - r.bottom) * sx; Gd[k * 4 + 2] = r.right * sx; Gd[k * 4 + 3] = (H - r.top) * sx;
+      GRd[k] = Math.min(radii[i], r.height / 2, r.width / 2) * sx; k++;
+    }
+    gl.uniform4fv(uG, Gd); gl.uniform1fv(uGR, GRd); gl.uniform1f(U.NG, k);
+  }
+  var t0 = performance.now(), last = 0, run = true;
+  document.addEventListener('visibilitychange', function () { run = !document.hidden; if (run) requestAnimationFrame(frame); });
+  function frame(now) {
+    if (!run) return;
+    if (now - last > 33 || reduce) {
+      last = now; rects();
+      gl.uniform1f(U.T, reduce ? 20 : (now - t0) / 1000);
+      gl.uniform1f(U.S, scrollY / Math.max(1, document.documentElement.scrollHeight));
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    requestAnimationFrame(frame);                    /* keeps the glass aligned while scrolling, even with reduced motion (water then stays still) */
+  }
+  requestAnimationFrame(frame); document.documentElement.classList.add('gl-on');
+})();
+</script>
 </body>
 </html>
